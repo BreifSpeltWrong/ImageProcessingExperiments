@@ -4,6 +4,12 @@ import java.io.File;
 import java.io.IOException;
 
 public class ImageReader {
+
+    /**
+     * Creates a BufferedImage from a specified filepath
+     * @param fileDirectory The file directory relative to Main.java
+     * @return BufferedImage
+     */
     public static BufferedImage readFileAsImage(String fileDirectory){
         BufferedImage returnImage = new BufferedImage(1,1, BufferedImage.TYPE_INT_ARGB);
         try{
