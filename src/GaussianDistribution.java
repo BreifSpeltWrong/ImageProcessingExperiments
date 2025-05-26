@@ -1,3 +1,6 @@
+/**
+ * @author Al, Will
+ */
 public class GaussianDistribution extends Distribution{
 
     /*
@@ -21,17 +24,17 @@ public class GaussianDistribution extends Distribution{
     private double mean;
     private double variance;
 
-    public static double getGaussianFromDistribution(double mean, double variance, double n){
+    private double getPDFGaussianFromDistribution(double mean, double variance, double n){
         return (1/(Math.sqrt(variance)*Math.sqrt(2*Math.PI)))*(Math.pow(Math.E,(-Math.pow((n-mean),2))/(2*variance)));
     }
 
     @Override
-    public double getValue(double n) {
+    public double getPDFValue(double n) {
         return 0;
     }
 
     @Override
-    public double get2DValue(double x, double y) {
+    public double get2DPDFValue(double x, double y) {
         return 0;
     }
 }

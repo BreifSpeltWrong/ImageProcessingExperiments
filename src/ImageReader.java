@@ -33,4 +33,32 @@ public class ImageReader {
         }
         return returnImage;
     }
+
+    public static int writeImageAsFile(BufferedImage image, String outputFileLocation){
+        try {
+            String extension = "png";
+
+            int dotIndex = outputFileLocation.lastIndexOf('.');
+            if (dotIndex > 0 && dotIndex < outputFileLocation.length() - 1) {
+                extension = outputFileLocation.substring(dotIndex + 1);
+            } else if (outputFileLocation.charAt(outputFileLocation.length() - 1) != '.'){
+                outputFileLocation += ".png";
+            } else {
+                outputFileLocation += "png";
+            }
+            
+            // Output file path
+            File outputFile = new File(outputFileLocation);
+
+
+            // Writing to file taking type and path as
+            ImageIO.write(image, extension, outputFile);
+
+            System.out.println("Writing complete.");
+        }
+        catch (IOException e) {
+            System.out.println("Error: " + e);
+        }
+        return 0;
+    }
 }
