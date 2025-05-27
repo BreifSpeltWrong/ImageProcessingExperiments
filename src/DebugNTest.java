@@ -1,4 +1,4 @@
-import Filters.Meanfilter;
+import Filters.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -9,51 +9,43 @@ import java.io.IOException;
 
 public class DebugNTest {
 
-    //For some reason the import wasn't working, so I pasted FTM
-    public static BufferedImage readFileAsImage(String fileDirectory){
-        BufferedImage returnImage = new BufferedImage(1,1, BufferedImage.TYPE_INT_ARGB);
-        try{
-            File input_file = new File(fileDirectory);
-
-            // image file path create an object of
-            // BufferedImage type and pass as parameter the
-            // width,  height and image int
-            // type. TYPE_INT_ARGB means that we are
-            // representing the Alpha , Red, Green and Blue
-            // component of the image pixel using 8-bit
-            // integer value.
-
-            // Reading input file
-            returnImage = ImageIO.read(input_file);
-
-            System.out.println(fileDirectory + " read successfully as image.");
-        }
-        catch (IOException e) {
-            System.out.println("Error: " + e);
-        }
-        return returnImage;
-    }
 
     public static void main(String[] args){
-        Meanfilter Meanfilter = new Meanfilter(3);
-        DebugNTest dnt = new DebugNTest();
+        //The Filter being tested, Change to approach filter
+        Filter testfilter = new Meanfilter(9);
 
-        BufferedImage bf = readFileAsImage("Test Images/Test Img 1.png");
-        dnt.displayImage(bf);
-        BufferedImage bf2 = Meanfilter.filterImage(bf);
-        dnt.displayImage(bf2);
+        //Opens the Test image dir
+        File testDir = new File("Test Images/");
+        File[] files = testDir.listFiles();
+        assert files != null;
+
+        //Goes through all the files in the test images folder and create a before and after frame for the filter
+        for(File f : files){
+            try {
+                JFrame frame = new JFrame(testfilter.getName() + " " + f.getName());
+                frame.setLayout(new GridLayout(1,2));
+                frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+                BufferedImage img = ImageIO.read(f);
+                BufferedImage filterImg = testfilter.filterImage(img);
+
+                JLabel preImg = new JLabel(new ImageIcon(img));
+                JLabel postImg = new JLabel(new ImageIcon(filterImg));
+
+                frame.add(preImg);
+                frame.add(postImg);
+
+                frame.setSize(2*img.getWidth(), img.getHeight());
+
+                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                frame.setLocation((int)(Math.random() * screenSize.width/2), (int)(Math.random() * screenSize.height/2));
+                frame.pack();
+                frame.setVisible(true);
+            } catch (IOException e) {
+                System.err.println("Error on Img");
+            }
+        }
+
     }
 
-    public void displayImage(BufferedImage img){
-        //displays the image
-        //stolen from a tutorial
-        JFrame frame = new JFrame();
-        JLabel label = new JLabel();
-        frame.setSize(img.getWidth(), img.getHeight());
-        label.setIcon(new ImageIcon(img));
-        frame.getContentPane().add(label, BorderLayout.CENTER);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-    }
 }
