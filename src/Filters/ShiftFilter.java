@@ -3,6 +3,15 @@ package Filters;
 import java.awt.image.BufferedImage;
 
 public class ShiftFilter extends Filter{
+
+    private int xOffset = 25;
+    private int yOffset = 25;
+
+    public ShiftFilter(int xOff, int yOff){
+        xOffset = xOff;
+        yOffset = yOff;
+    }
+
     /**
      * Filters the input image to return a shifted image.
      *
@@ -11,7 +20,16 @@ public class ShiftFilter extends Filter{
      */
     @Override
     public BufferedImage filterImage(BufferedImage inputImage) {
-        return null;
+        BufferedImage returnImage = new BufferedImage(inputImage.getWidth(), inputImage.getHeight(), inputImage.getType());
+        int width = inputImage.getWidth();
+        int height = inputImage.getHeight();
+
+        for(int x = 0; x < returnImage.getWidth(); x++) {
+            for (int y = 0; y < returnImage.getHeight(); y++) {
+                returnImage.setRGB((x+xOffset)%width, (y+yOffset)%height, inputImage.getRGB(x, y));
+            }
+        }
+        return returnImage;
     }
 
     /**
@@ -41,7 +59,7 @@ public class ShiftFilter extends Filter{
      */
     @Override
     public String[] getBonusArgs() {
-        return new String[0];
+        return new String[] {"Horizontal Offset", "Vertical Offset"};
     }
 
     /**
