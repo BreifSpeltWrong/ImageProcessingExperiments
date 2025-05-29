@@ -27,4 +27,10 @@ public abstract class Filter {
      * @return An array of argument names
      */
     public abstract String[] getBonusArgs();
+
+    /**
+     * Sets any bonus arguments required
+     */
+    public abstract void setBonusArgs(String[] bonusArgs);
+
 }

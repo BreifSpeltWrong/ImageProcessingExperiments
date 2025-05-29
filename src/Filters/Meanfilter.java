@@ -69,4 +69,14 @@ public class Meanfilter extends Filter {
         return new String[0];
     }
 
+    /**
+     * Sets any bonus arguments required
+     *
+     * @param bonusArgs
+     */
+    @Override
+    public void setBonusArgs(String[] bonusArgs) {
+
+    }
+
 }
