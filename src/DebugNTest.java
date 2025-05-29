@@ -12,7 +12,7 @@ public class DebugNTest {
 
     public static void main(String[] args){
         //The Filter being tested, Change to approach filter
-        Filter testfilter = new Meanfilter(9);
+        Filter testfilter = new GaussianMeanFilter(3);
 
         //Opens the Test image dir
         File testDir = new File("Test Images/");

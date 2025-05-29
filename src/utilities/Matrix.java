@@ -1,3 +1,4 @@
+package utilities;
 
 /**
  * @author Will
@@ -48,7 +49,7 @@ public class Matrix {
             }
         }
         catch(ArrayIndexOutOfBoundsException e) {
-            throw new Exception(String.format("Matrix of size %1$ X %2$ does not allow for added values of size %3$ X %4$", dimensions[1], dimensions[0], array2D[0].length, array2D.length));
+            throw new Exception(String.format("Ultilities.Matrix of size %1$ X %2$ does not allow for added values of size %3$ X %4$", dimensions[1], dimensions[0], array2D[0].length, array2D.length));
         }
     }
 

@@ -1,7 +1,9 @@
-public class GaussianDistribution extends Distribution{
+package utilities;
+
+public class GaussianDistribution extends Distribution {
 
     /*
-    Gaussian Distribution:
+    Gaussian Ultilities.Distribution:
     v = variance
     s = sqrt(variance)
     m = mean
